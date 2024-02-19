@@ -1,0 +1,66 @@
+openapi: 3.0.0
+
+info:
+  title: Social App
+  description: Our First Social App Just basic one Practicing
+  version: 1.0.1
+  contact:
+    name: Harsh Pandey
+    email: harshp6421@gmail.com
+
+servers:
+  - url: http://localhost:3000/
+    description: Basic Home Route Welcoming You
+  - url: https://localhost:3000/api/v1
+    description: Dummy one it doesn't work
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /:
+    get:
+      description: Gives a welcome greet homepage
+      summary: return a text
+      responses: "200"
+  /api/v1/instagram:
+    get:
+      summary: Returns a JSON object with Username,Follower,Follows and Date
+      responses:
+        "200":
+          description: Gives a JSON Object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  follower:
+                    type: integer
+                  follows:
+                    type: integer
+                  date:
+                    type: string
+  /api/v1/{token}:
+    get:
+      summary: Returns the token
+      parameters:
+        - name: token
+          default: token
+          in: path
+
+      responses:
+        "200":
+          description: Gives the value passed into URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  params:
+                    type: string
